@@ -24,7 +24,7 @@ const pegarNumeroDeLinhas = () => {
   while (true) {
     const linhas = prompt("Entre o numero de linhas para apostar (1-3): ");
     const numeroLinhas = parseFloat(linhas);
-    if (isNaN(numeroLinhas) || numeroLinhas <= 0 || numeroLinhas >= 3) {
+    if (isNaN(numeroLinhas) || numeroLinhas <= 0 || numeroLinhas > 3) {
       console.log("Valor invalido, tente novamente");
     } else {
       return numeroLinhas;
@@ -32,5 +32,22 @@ const pegarNumeroDeLinhas = () => {
   }
 };
 
-deposito();
-pegarNumeroDeLinhas();
+const pegarAposta = (balanca, linhas) => {
+  while (true) {
+    const aposta = prompt("Entre a quantidade para apostar a cada linha: ");
+    const numeroAposta = parseFloat(aposta);
+    if (
+      isNaN(numeroAposta) ||
+      numeroAposta <= 0 ||
+      numeroAposta > balanca / linhas
+    ) {
+      console.log("Valor invalido, tente novamente");
+    } else {
+      return numeroAposta;
+    }
+  }
+};
+
+let balanca = deposito();
+const numeroLinhas = pegarNumeroDeLinhas();
+const aposta = pegarAposta(balanca);
